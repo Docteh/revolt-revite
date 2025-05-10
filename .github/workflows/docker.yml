@@ -56,6 +56,9 @@ jobs:
                   platforms: ${{ matrix.architecture }}
                   cache-from: type=local,src=/tmp/.buildx-cache/${{ matrix.architecture }}
                   cache-to: type=local,dest=/tmp/.buildx-cache-new/${{ matrix.architecture }},mode=max
+            - name: ls cache
+              run: |
+                  ls -lR /tmp/
             - name: Move cache
               run: |
                   rm -rf /tmp/.buildx-cache/${{ matrix.architecture }}
