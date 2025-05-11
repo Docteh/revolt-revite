@@ -54,11 +54,11 @@ jobs:
                   registry: ghcr.io
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
-            - name: Build and publish {{ github.event_name != 'pull_request' }}
+            - name: Build and publish ${{ github.event_name != 'pull_request' }}
               uses: docker/build-push-action@v6
               with:
                   context: .
-                  push: {{ github.event_name != 'pull_request' }}
+                  push: ${{ github.event_name != 'pull_request' }}
                   platforms: linux/amd64
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
