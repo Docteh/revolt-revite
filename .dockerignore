@@ -8,3 +8,8 @@ node_modules
 
 Dockerfile
 .dockerignore
+
+# For the multistage build
+/usr/src/app/external
+/usr/src/app/node_modules
+/usr/src/app/.yarn
