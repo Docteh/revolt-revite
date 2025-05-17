@@ -1,3 +1,4 @@
+# syntax=docker.io/docker/dockerfile:1.7-labs
 FROM --platform=$BUILDPLATFORM node:16-buster AS builder
 
 WORKDIR /usr/src/app
