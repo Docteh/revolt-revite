@@ -15,7 +15,7 @@ FROM node:24-alpine
 WORKDIR /usr/src/app
 COPY docker/package.json docker/yarn.lock .
 RUN yarn install --frozen-lockfile
-COPY --from=builder --exclude=.yarn* --exclude=.git --exclude=external --exclude=node_modules /usr/src/app .
+COPY --from=builder --exclude=package.json --exclude=yarn.lock --exclude=.yarn* --exclude=.git --exclude=external --exclude=node_modules /usr/src/app .
 
 EXPOSE 5000
 CMD [ "yarn", "start:inject" ]
