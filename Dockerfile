@@ -11,15 +11,11 @@ RUN yarn build:deps
 RUN yarn build:highmem
 RUN yarn workspaces focus --production --all
 
-FROM node:22-alpine
+FROM node:24-alpine
 WORKDIR /usr/src/app
-COPY package.json.docker package.json
-COPY yarn.lock.docker yarn.lock
+COPY docker/package.json docker/yarn.lock .
 RUN yarn install --frozen-lockfile
-#COPY scripts/inject.js scripts/inject.js
-#COPY --from=builder /usr/src/app/dist dist
-#nope: COPY --from=builder --exclude=/usr/src/app/external/* /usr/src/app .
-COPY --from=builder --exclude=.git --exclude=external/* /usr/src/app .
+COPY --from=builder --exclude=.yarn* --exclude=.git --exclude=external --exclude=node_modules /usr/src/app .
 
 EXPOSE 5000
 CMD [ "yarn", "start:inject" ]
