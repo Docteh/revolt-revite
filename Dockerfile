@@ -18,7 +18,8 @@ COPY yarn.lock.docker yarn.lock
 RUN yarn install --frozen-lockfile
 #COPY scripts/inject.js scripts/inject.js
 #COPY --from=builder /usr/src/app/dist dist
-COPY --from=builder --exclude=/usr/src/app/external/* /usr/src/app .
+#nope: COPY --from=builder --exclude=/usr/src/app/external/* /usr/src/app .
+COPY --from=builder --exclude=.git --exclude=external/* /usr/src/app .
 
 EXPOSE 5000
 CMD [ "yarn", "start:inject" ]
